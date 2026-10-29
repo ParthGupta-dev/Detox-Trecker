@@ -8,6 +8,8 @@ export default defineConfig({
     environment: 'node',
     // Test file discovery
     include: ['tests/**/*.test.ts'],
+    // No tests exist until Phase 3; without this, `vitest run` fails CI on an empty suite.
+    passWithNoTests: true,
     // Timeout per test (in ms)
     testTimeout: 10000,
   },

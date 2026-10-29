@@ -80,6 +80,8 @@ These rules apply to **me (Kanishk)** and to **any AI assistant** helping with t
 3. Open a PR for every feature, even solo; write a short description of what and why.
 4. Commit after each working step, not at the end of the day.
 5. Never commit `node_modules`, `.env` or build output.
+6. **No AI attribution anywhere on GitHub.** An AI assistant must never appear as author, co-author, collaborator or contributor. That means no `Co-Authored-By:` trailers, no "Generated with ..." lines, and no AI mentions in commit messages, commit history, PR titles or descriptions, issues, comments, repo settings, or the collaborators list. Every commit and PR is under my name only.
+7. **Always ask me before committing.** The AI assistant must show me what will be committed (files and the proposed message) and wait for my explicit approval first. The same applies to pushing, opening PRs, and any other action that changes the repo history or GitHub. Approval for one commit does not carry over to the next.
 
 ## G. Testing Rules
 
