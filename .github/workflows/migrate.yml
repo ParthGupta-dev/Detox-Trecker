@@ -1,0 +1,54 @@
+name: DB Migration — Production
+
+# Runs Prisma migrations against the production Supabase database.
+# Activated in Phase 5 — until then, this workflow does nothing.
+#
+# RULES:
+# - Only runs on pushes to main (never on PRs)
+# - Only runs when Prisma migration files change
+# - Uses DIRECT_URL (not the pooled URL) — migrations need a full session connection
+# - The DIRECT_URL secret is stored in GitHub Actions secrets, never in the repo
+#
+# WHY through CI and not from a laptop:
+#   - Reproducible: the same migration runs in the same way every time
+#   - Auditable: the CI log shows exactly what ran
+#   - Safe: no one can accidentally run a half-finished migration from a dev machine
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/prisma/migrations/**'
+
+jobs:
+  migrate:
+    name: Prisma migrate deploy (production)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Apply all pending migrations to the production database.
+      # The DIRECT_URL secret is set in GitHub → Settings → Secrets → Actions.
+      # It points at the Supabase DIRECT (not pooled) connection string for detox-prod.
+      - name: Run migrations
+        run: npx prisma migrate deploy
+        env:
+          # DIRECT_URL is required for migrations (not DATABASE_URL / pooled)
+          DATABASE_URL: ${{ secrets.PROD_DIRECT_URL }}
+          DIRECT_URL: ${{ secrets.PROD_DIRECT_URL }}

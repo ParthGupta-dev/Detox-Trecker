@@ -1,0 +1,10 @@
+# Integration tests — full endpoint tests using Supertest + a test database
+
+# What belongs here:
+# - POST /api/logs — valid, invalid body, unauthenticated, wrong user
+# - GET /api/auth/me — authenticated and not authenticated
+# - Ownership checks: user A cannot read user B's logs
+
+# These tests need a real (but throwaway) Postgres database.
+# In CI, a Postgres service container is used. Locally, use the dev Supabase DB
+# or a local Postgres instance. Never run integration tests against prod.

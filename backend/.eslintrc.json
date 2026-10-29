@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "env": {
+    "node": true,
+    "es2022": true
+  },
+  "rules": {
+    // Disallow 'any' — if you must use it, add an explanatory comment
+    "@typescript-eslint/no-explicit-any": "warn",
+    // Unused variables are bugs or dead code
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    // Prefer const over let where possible
+    "prefer-const": "error"
+  },
+  "ignorePatterns": ["dist/", "node_modules/"]
+}

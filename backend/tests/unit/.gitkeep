@@ -1,0 +1,10 @@
+# Unit tests — pure logic, no database or HTTP
+
+# What belongs here:
+# - Streak calculation (computeStreak function)
+# - Goal progress calculation
+# - Zod schema validation (valid inputs, invalid inputs, edge cases)
+# - Any other pure utility functions
+
+# These tests run fast and need no external services.
+# First test will be added in Phase 3.
